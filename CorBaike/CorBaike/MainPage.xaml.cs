@@ -26,5 +26,12 @@ namespace CorBaike
         {
             this.InitializeComponent();
         }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            txbKeyword.Text = e.Parameter.ToString();
+        }
     }
 }
