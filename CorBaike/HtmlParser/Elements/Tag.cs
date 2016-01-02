@@ -1,10 +1,9 @@
-﻿using System;
+﻿using HtmlSharp.Css;
+using HtmlSharp.Elements.Tags;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using HtmlSharp.Elements.Tags;
-using System.Collections.ObjectModel;
-using HtmlSharp.Css;
 
 namespace HtmlSharp.Elements
 {

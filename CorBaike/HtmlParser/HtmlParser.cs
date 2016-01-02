@@ -1,11 +1,11 @@
-﻿using System;
+﻿using HtmlSharp.Elements;
+using HtmlSharp.Extensions;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using HtmlSharp.Elements;
-using HtmlSharp.Extensions;
-using System.Globalization;
 
 namespace HtmlSharp
 {

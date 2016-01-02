@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using HtmlSharp.Elements;
-
-namespace HtmlSharp.Css
+﻿namespace HtmlSharp.Css
 {
     public class CheckedFilter : AttributeFilter
     {

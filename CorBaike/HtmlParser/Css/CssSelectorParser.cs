@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using HtmlSharp.Elements;
-using HtmlSharp.Extensions;
-using System.Collections.Specialized;
 
 namespace HtmlSharp.Css
 {
