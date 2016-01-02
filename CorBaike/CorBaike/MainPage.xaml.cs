@@ -27,11 +27,13 @@ namespace CorBaike
             this.InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
             txbKeyword.Text = e.Parameter.ToString();
+
+            txbResult.Text = await QueryBaike.BaiduBaike.QueryByKeyword(txbKeyword.Text);
         }
     }
 }
