@@ -8,7 +8,7 @@
       <Example>查询关键字</Example>
       <ListenFor>查询{keyword}</ListenFor>
       <Feedback>正在查询{keyword}</Feedback>
-      <Navigate Target="foo"/>
+      <VoiceCommandService Target="BaikeQueryService"/>
     </Command>
 
     <PhraseTopic Label="keyword" Scenario="Natural Language">

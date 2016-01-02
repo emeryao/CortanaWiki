@@ -35,5 +35,10 @@ namespace CorBaike
 
             txbResult.Text = await QueryBaike.BaiduBaike.QueryByKeyword(txbKeyword.Text);
         }
+
+        private async void button_Click(object sender, RoutedEventArgs e)
+        {
+            txbResult.Text = await QueryBaike.BaiduBaike.QueryByKeyword(txbKeyword.Text);
+        }
     }
 }

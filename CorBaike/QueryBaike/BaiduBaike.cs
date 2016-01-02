@@ -13,6 +13,7 @@ namespace QueryBaike
     {
         public async static Task<string> QueryByKeyword(string keyword)
         {
+            //return $"抱歉，没有找到与{keyword}相关的百科结果。";
             string content = "";
             string keyWord = System.Net.WebUtility.UrlEncode(keyword);
 
