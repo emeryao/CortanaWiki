@@ -16,7 +16,12 @@
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>CorBaike_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>CorBaike_StoreKey.pfx</PackageCertificateKeyFile>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
+    <AppxBundle>Always</AppxBundle>
+    <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
+    <PackageCertificateThumbprint>9EAE2D4C7612EE4685B314BC98CA986C1F4A76F6</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -92,6 +97,31 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="CorBaike_StoreKey.pfx" />
+    <None Include="Package.StoreAssociation.xml" />
+    <Content Include="Assets\CorBaikeLogo-100.png" />
+    <Content Include="Assets\CorBaikeLogo-1240-600.png" />
+    <Content Include="Assets\CorBaikeLogo-1240.png" />
+    <Content Include="Assets\CorBaikeLogo-150.png" />
+    <Content Include="Assets\CorBaikeLogo-176.png" />
+    <Content Include="Assets\CorBaikeLogo-200.png" />
+    <Content Include="Assets\CorBaikeLogo-310-150.png" />
+    <Content Include="Assets\CorBaikeLogo-310-150.scale-100.png" />
+    <Content Include="Assets\CorBaikeLogo-310.png" />
+    <Content Include="Assets\CorBaikeLogo-44.png" />
+    <Content Include="Assets\CorBaikeLogo-44.scale-100.png" />
+    <Content Include="Assets\CorBaikeLogo-44.scale-200.png" />
+    <Content Include="Assets\CorBaikeLogo-44.scale-400.png" />
+    <Content Include="Assets\CorBaikeLogo-88.png" />
+    <Content Include="Assets\CorBaikeLogo-50.png" />
+    <Content Include="Assets\CorBaikeLogo-63.png" />
+    <Content Include="Assets\CorBaikeLogo-75.png" />
+    <Content Include="Assets\SplashScreen.scale-200.png" />
+    <Content Include="Assets\Square150x150Logo.png" />
+    <Content Include="Assets\Square150x150Logo.scale-100.png" />
+    <Content Include="Assets\Square310x310Logo.png" />
+    <Content Include="Assets\Square310x310Logo.scale-100.png" />
+    <Content Include="Assets\Square310x310Logo.scale-400.png" />
     <Content Include="VoiceCommandDefinition.xml" />
     <None Include="project.json" />
   </ItemGroup>
@@ -112,13 +142,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\Default.rd.xml" />
-    <Content Include="Assets\LockScreenLogo.scale-200.png" />
-    <Content Include="Assets\SplashScreen.scale-200.png" />
-    <Content Include="Assets\Square150x150Logo.scale-200.png" />
-    <Content Include="Assets\Square44x44Logo.scale-200.png" />
-    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
-    <Content Include="Assets\StoreLogo.png" />
-    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -139,6 +162,11 @@
       <Project>{41f5ef51-a1a8-492a-89f6-906388078526}</Project>
       <Name>QueryBaike</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="WindowsMobile, Version=10.0.10586.0">
+      <Name>Windows Mobile Extensions for the UWP</Name>
+    </SDKReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
