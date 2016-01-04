@@ -22,12 +22,26 @@ namespace CorBaike
 
             txbKeyword.Text = e.Parameter.ToString();
 
-            txbResult.Text = await QueryBaike.BaiduBaike.QueryByKeyword(txbKeyword.Text);
+            string result = await QueryBaike.BaiduBaike.QueryByKeyword(txbKeyword.Text);
+
+            if (!string.IsNullOrWhiteSpace(result))
+                txbResult.Text = result;
         }
 
         private async void button_Click(object sender, RoutedEventArgs e)
         {
             txbResult.Text = await QueryBaike.BaiduBaike.QueryByKeyword(txbKeyword.Text);
+        }
+
+        private async void txbKeyword_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Enter)
+            {
+                string result = await QueryBaike.BaiduBaike.QueryByKeyword(txbKeyword.Text);
+
+                if (!string.IsNullOrWhiteSpace(result))
+                    txbResult.Text = result;
+            }
         }
     }
 }

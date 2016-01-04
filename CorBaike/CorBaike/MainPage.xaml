@@ -5,12 +5,15 @@
     xmlns:local="using:CorBaike"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBox x:Name="txbKeyword" HorizontalAlignment="Left" Margin="10,68,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="38" Width="228"/>
-        <TextBlock x:Name="txbResult" Margin="10,106,10,0" TextWrapping="Wrap" Text="" Height="524" VerticalAlignment="Top"/>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="271,69,0,0" VerticalAlignment="Top" Click="button_Click"/>
+    <Grid>
+        <TextBox x:Name="txbKeyword" Margin="10,115,80,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="24" PlaceholderText="请输入关键字后点击查询" KeyDown="txbKeyword_KeyDown"/>
+        <TextBlock x:Name="txbResult" Margin="10,152,10,45" TextWrapping="Wrap" Text="打开小娜/Cortana对她说：小娜百科查询+你想查询的词语。就可以听到小娜说给你听的查询结果啦！"/>
+        <Button x:Name="button" Content="查询" HorizontalAlignment="Right" Margin="0,115,10,0" VerticalAlignment="Top" Click="button_Click" Height="32" Width="65"/>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="100" Margin="10,10,0,0" VerticalAlignment="Top" Width="100" Source="Assets/CorBaikeLogo-310.png"/>
+        <TextBlock x:Name="textBlock" Margin="115,10,0,0" TextWrapping="Wrap" Text="小娜百科" VerticalAlignment="Top" Height="61" FontSize="45" HorizontalAlignment="Left" Width="198"/>
+        <TextBlock x:Name="textBlock1" Margin="115,71,0,0" TextWrapping="Wrap" Text="不用打字的百度百科" VerticalAlignment="Top" TextAlignment="Right" HorizontalAlignment="Left" Width="175"/>
 
     </Grid>
 </Page>
