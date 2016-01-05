@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.AppService;
 using Windows.ApplicationModel.Background;
@@ -22,18 +23,6 @@ namespace CorBaike.BaikeService
 
             var triggerDetails = taskInstance.TriggerDetails as AppServiceTriggerDetails;
 
-            // Load localized resources for strings sent to Cortana to be displayed to the user.
-            //cortanaResourceMap = ResourceManager.Current.MainResourceMap.GetSubtree("Resources");
-
-            //// Select the system language, which is what Cortana should be running as.
-            //cortanaContext = ResourceContext.GetForViewIndependentUse();
-
-            //// Get the currently used system date format
-            //dateFormatInfo = CultureInfo.CurrentCulture.DateTimeFormat;
-
-            // This should match the uap:AppService and VoiceCommandService references from the 
-            // package manifest and VCD files, respectively. Make sure we've been launched by
-            // a Cortana Voice Command.
             if (triggerDetails != null && triggerDetails.Name == "BaikeQueryService")
             {
                 try
@@ -41,14 +30,8 @@ namespace CorBaike.BaikeService
                     voiceServiceConnection = VoiceCommandServiceConnection.FromAppServiceTriggerDetails(triggerDetails);
 
                     voiceServiceConnection.VoiceCommandCompleted += OnVoiceCommandCompleted;
-
-                    // GetVoiceCommandAsync establishes initial connection to Cortana, and must be called prior to any 
-                    // messages sent to Cortana. Attempting to use ReportSuccessAsync, ReportProgressAsync, etc
-                    // prior to calling this will produce undefined behavior.
                     VoiceCommand voiceCommand = await voiceServiceConnection.GetVoiceCommandAsync();
 
-                    // Depending on the operation (defined in AdventureWorks:AdventureWorksCommands.xml)
-                    // perform the appropriate command.
                     switch (voiceCommand.CommandName)
                     {
                         case "showBaikeForKeyword":
@@ -76,10 +59,15 @@ namespace CorBaike.BaikeService
 
             var userMessage = new VoiceCommandUserMessage();
 
-            userMessage.DisplayMessage =
-            userMessage.SpokenMessage = await QueryBaike.BaiduBaike.QueryByKeyword(keyword);
+            var data = await QueryBaike.BaiduBaike.QueryByKeyword(keyword);
 
-            VoiceCommandResponse queryResponse = VoiceCommandResponse.CreateResponse(userMessage);
+            userMessage.DisplayMessage = userMessage.SpokenMessage = data.Summary;
+
+            VoiceCommandResponse queryResponse = null;
+            if (data.Image != null)
+                queryResponse = VoiceCommandResponse.CreateResponse(userMessage, new List<VoiceCommandContentTile>() { new VoiceCommandContentTile() { Image = data.Image, ContentTileType = VoiceCommandContentTileType.TitleWith280x140Icon } });
+            else
+                queryResponse = VoiceCommandResponse.CreateResponse(userMessage);
 
             await voiceServiceConnection.ReportSuccessAsync(queryResponse);
         }

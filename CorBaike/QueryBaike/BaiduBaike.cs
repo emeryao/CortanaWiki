@@ -1,16 +1,27 @@
 ﻿using HtmlSharp;
+using System;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
+using Windows.Storage;
 
 namespace QueryBaike
 {
     public class BaiduBaike
     {
-        public async static Task<string> QueryByKeyword(string keyword)
+        public class BaikeData
         {
+            public string Summary { get; set; }
+            public StorageFile Image { get; set; }
+        }
+
+        public async static Task<BaikeData> QueryByKeyword(string keyword)
+        {
+            BaikeData retData = new BaikeData();
+
             if (string.IsNullOrWhiteSpace(keyword))
-                return "";
+                return retData;
 
             string keyWord = System.Net.WebUtility.UrlEncode(keyword);
 
@@ -18,7 +29,8 @@ namespace QueryBaike
 
             if (url.Contains("没有找到") || url.Contains("search/none"))
             {
-                return $"抱歉，没有找到与{keyword}相关的百科结果。";
+                retData.Summary = $"抱歉，没有找到与{keyword}相关的百科结果。";
+                return retData;
             }
 
             // replace to wap baike to shorter the html
@@ -32,22 +44,46 @@ namespace QueryBaike
                 Document detailDoc = parser.Parse(content);
 
                 var para = detailDoc.Find<HtmlSharp.Elements.Tags.P>(".summary+p");
-                
-                if(para == null)
+
+                if (para == null)
                     para = detailDoc.Find<HtmlSharp.Elements.Tags.P>(".summary>p");
-                    
+
                 if (para != null)
                 {
                     string strText = System.Text.RegularExpressions.Regex.Replace(para.ToString(), "<[^>]+>", "");
                     strText = System.Text.RegularExpressions.Regex.Replace(strText, "&[^;]+;", "");
                     strText = System.Text.RegularExpressions.Regex.Replace(strText, "\\[[^>]+\\]", "");
-                    return strText;
+                    retData.Summary = strText;
+
+                    var img = detailDoc.Find<HtmlSharp.Elements.Tags.Img>(".img-box>a>img");
+
+                    if (!string.IsNullOrWhiteSpace(img?.Src))
+                    {
+
+                        var file = await ApplicationData.Current.TemporaryFolder.CreateFileAsync($"{keyword}.jpg", CreationCollisionOption.OpenIfExists);
+                        using (HttpClient client = new HttpClient())
+                        {
+                            var bytes = await client.GetByteArrayAsync(img.Src);
+
+                            await FileIO.WriteBytesAsync(file, bytes);
+                        }
+
+                        retData.Image = file;
+                    }
+
+                    return retData;
                 }
                 else
-                    return $"抱歉，没有找到与{keyword}相关的百科结果。";
+                {
+                    retData.Summary = $"抱歉，没有找到与{keyword}相关的百科结果。";
+                    return retData;
+                }
             }
             else
-                return $"抱歉，没有找到与{keyword}相关的百科结果。";
+            {
+                retData.Summary = $"抱歉，没有找到与{keyword}相关的百科结果。";
+                return retData;
+            }
         }
 
 
@@ -55,16 +91,17 @@ namespace QueryBaike
         {
             HttpWebRequest request = WebRequest.CreateHttp(url);
 
-            WebResponse response = await request.GetResponseAsync();
-
-            if (uriOnly)
-                return response.ResponseUri?.AbsoluteUri;
-
-            Stream s = response.GetResponseStream();
-
-            using (StreamReader sr = new StreamReader(s))
+            using (WebResponse response = await request.GetResponseAsync())
             {
-                return await sr.ReadToEndAsync();
+                if (uriOnly)
+                    return response.ResponseUri?.AbsoluteUri;
+
+                Stream s = response.GetResponseStream();
+
+                using (StreamReader sr = new StreamReader(s))
+                {
+                    return await sr.ReadToEndAsync();
+                }
             }
         }
     }
