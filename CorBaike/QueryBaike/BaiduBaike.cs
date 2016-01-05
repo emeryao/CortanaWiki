@@ -32,6 +32,10 @@ namespace QueryBaike
                 Document detailDoc = parser.Parse(content);
 
                 var para = detailDoc.Find<HtmlSharp.Elements.Tags.P>(".summary+p");
+                
+                if(para == null)
+                    para = detailDoc.Find<HtmlSharp.Elements.Tags.P>(".summary>p");
+                    
                 if (para != null)
                 {
                     string strText = System.Text.RegularExpressions.Regex.Replace(para.ToString(), "<[^>]+>", "");
