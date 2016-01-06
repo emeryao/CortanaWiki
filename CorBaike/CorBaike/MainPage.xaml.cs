@@ -32,6 +32,9 @@ namespace CorBaike
 
             if (!string.IsNullOrWhiteSpace(result))
                 txbResult.Text = result;
+
+            if (ApplicationData.Current.RoamingSettings.Values.ContainsKey("Theme"))
+                this.RequestedTheme = (ElementTheme)Enum.Parse(typeof(ElementTheme), ApplicationData.Current.RoamingSettings.Values["Theme"].ToString());
         }
 
         private async void button_Click(object sender, RoutedEventArgs e)
@@ -60,6 +63,7 @@ namespace CorBaike
                 txbResult.Text = "打开小娜/Cortana对她说：小娜百科查询+你想查询的词语。就可以听到小娜说给你听的查询结果啦！";
                 return;
             }
+            this.prograssRing.IsActive = true;
 
             var data = await QueryBaike.BaiduBaike.QueryByKeyword(keyword);
 
@@ -81,6 +85,7 @@ namespace CorBaike
                 BitmapImage bitmap = new BitmapImage(new Uri("ms-appx:///Assets/CorBaikeLogo-310.png"));
                 image.Source = bitmap;
             }
+            this.prograssRing.IsActive = false;
         }
 
         private void ThemeToggleButton_Checked(object sender, RoutedEventArgs e)
@@ -112,6 +117,12 @@ namespace CorBaike
 
             MessageDialog dlg = new MessageDialog("缓存清理完成！", "提示");
             await dlg.ShowAsync();
+        }
+
+        private void AppBarButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.RequestedTheme = this.RequestedTheme == ElementTheme.Light ? ElementTheme.Dark : ElementTheme.Light;
+            ApplicationData.Current.RoamingSettings.Values["Theme"] = this.RequestedTheme.ToString();
         }
     }
 }

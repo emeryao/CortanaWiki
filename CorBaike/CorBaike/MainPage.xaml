@@ -5,14 +5,14 @@
     xmlns:local="using:CorBaike"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    mc:Ignorable="d" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RequestedTheme="Light">
     <Page.BottomAppBar>
         <CommandBar ClosedDisplayMode="Minimal">
-            <AppBarToggleButton Label="切换主题" Checked="ThemeToggleButton_Checked" Unchecked="ThemeToggleButton_Unchecked">
-                <AppBarToggleButton.Icon>
+            <AppBarButton Label="切换主题" Click="AppBarButton_Click">
+                <AppBarButton.Icon>
                     <FontIcon Glyph="&#xE771;" />
-                </AppBarToggleButton.Icon>
-            </AppBarToggleButton>
+                </AppBarButton.Icon>
+            </AppBarButton>
             <AppBarButton x:Name="abbClearTemp" Label="清空缓存" Icon="Delete" Click="abbClearTemp_Click"/>
         </CommandBar>
     </Page.BottomAppBar>
@@ -24,6 +24,7 @@
         <Image x:Name="image" HorizontalAlignment="Left" Height="100" Margin="10,10,0,0" VerticalAlignment="Top" Width="100" Source="Assets/CorBaikeLogo-310.png"/>
         <TextBlock x:Name="textBlock" Margin="115,10,0,0" TextWrapping="Wrap" Text="小娜百科" VerticalAlignment="Top" Height="61" FontSize="45" HorizontalAlignment="Left" Width="198"/>
         <TextBlock x:Name="textBlock1" Margin="115,71,0,0" TextWrapping="Wrap" Text="不用打字的百度百科" VerticalAlignment="Top" TextAlignment="Right" HorizontalAlignment="Left" Width="175"/>
+        <ProgressRing x:Name="prograssRing" HorizontalAlignment="Stretch" Margin="150,180,150,0" VerticalAlignment="Top" Height="58"/>
     </Grid>
 
 
