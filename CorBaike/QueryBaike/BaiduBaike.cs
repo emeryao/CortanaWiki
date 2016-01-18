@@ -54,7 +54,7 @@ namespace QueryBaike
                     string strText = System.Text.RegularExpressions.Regex.Replace(para.ToString(), "<[^>]+>", "");
                     strText = System.Text.RegularExpressions.Regex.Replace(strText, "&[^;]+;", "");
                     strText = System.Text.RegularExpressions.Regex.Replace(strText, "\\[[^>]+\\]", "");
-                    retData.Summary = strText;
+                    retData.Summary = strText + "\r\n转到小娜百科就可以查看详细的百科信息了哦！么么哒！";
 
                     var img = detailDoc.Find<HtmlSharp.Elements.Tags.Img>(".img-box>a>img");
 
