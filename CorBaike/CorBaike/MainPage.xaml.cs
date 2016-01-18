@@ -7,8 +7,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
-
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+using Windows.Web.Http;
 
 namespace CorBaike
 {
@@ -24,17 +23,25 @@ namespace CorBaike
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
+            if (ApplicationData.Current.RoamingSettings.Values.ContainsKey("Theme"))
+                this.RequestedTheme = (ElementTheme)Enum.Parse(typeof(ElementTheme), ApplicationData.Current.RoamingSettings.Values["Theme"].ToString());
+
             base.OnNavigatedTo(e);
 
             txbKeyword.Text = e.Parameter.ToString();
 
-            string result = (await QueryBaike.BaiduBaike.QueryByKeyword(txbKeyword.Text)).Summary;
+            var result = (await QueryBaike.BaiduBaike.QueryByKeyword(txbKeyword.Text));
 
-            if (!string.IsNullOrWhiteSpace(result))
-                txbResult.Text = result;
+            if (!string.IsNullOrWhiteSpace(result.Url))
+            {
+                txbResult.Visibility = Visibility.Collapsed;
+                webView.Visibility = Visibility.Visible;
 
-            if (ApplicationData.Current.RoamingSettings.Values.ContainsKey("Theme"))
-                this.RequestedTheme = (ElementTheme)Enum.Parse(typeof(ElementTheme), ApplicationData.Current.RoamingSettings.Values["Theme"].ToString());
+                var requestMessage = new HttpRequestMessage(HttpMethod.Get, new Uri(result.Url));
+                requestMessage.Headers.Add("User-Agent", "Mozilla/5.0 (Windows Phone 10.0;  Android 4.2.1; Nokia; Lumia 520) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2486.0 Mobile Safari/537.36 Edge/13.10570");
+                webView.NavigateWithHttpRequestMessage(requestMessage);
+            }
+
         }
 
         private async void button_Click(object sender, RoutedEventArgs e)
@@ -61,30 +68,42 @@ namespace CorBaike
                 }
 
                 txbResult.Text = "打开小娜/Cortana对她说：小娜百科查询+你想查询的词语。就可以听到小娜说给你听的查询结果啦！";
+                txbResult.Visibility = Visibility.Visible;
+                webView.Visibility = Visibility.Collapsed;
+
                 return;
             }
             this.prograssRing.IsActive = true;
 
             var data = await QueryBaike.BaiduBaike.QueryByKeyword(keyword);
-
-            if (!string.IsNullOrWhiteSpace(data.Summary))
-                txbResult.Text = data.Summary;
-
-            if (data.Image != null)
+            if (!string.IsNullOrWhiteSpace(data.Url))
             {
+                txbResult.Visibility = Visibility.Collapsed;
+                webView.Visibility = Visibility.Visible;
 
-                FileRandomAccessStream stream = (FileRandomAccessStream)await data.Image.OpenAsync(FileAccessMode.Read);
-                BitmapImage bitmap = new BitmapImage();
-
-                await bitmap.SetSourceAsync(stream);
-
-                image.Source = bitmap;
+                var requestMessage = new HttpRequestMessage(HttpMethod.Get, new Uri(data.Url));
+                requestMessage.Headers.Add("User-Agent", "Mozilla/5.0 (Windows Phone 10.0;  Android 4.2.1; Nokia; Lumia 520) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2486.0 Mobile Safari/537.36 Edge/13.10570");
+                webView.NavigateWithHttpRequestMessage(requestMessage);
             }
-            else
-            {
-                BitmapImage bitmap = new BitmapImage(new Uri("ms-appx:///Assets/CorBaikeLogo-310.png"));
-                image.Source = bitmap;
-            }
+
+            //if (!string.IsNullOrWhiteSpace(data.Summary))
+            //    txbResult.Text = data.Summary;
+
+            //if (data.Image != null)
+            //{
+
+            //    FileRandomAccessStream stream = (FileRandomAccessStream)await data.Image.OpenAsync(FileAccessMode.Read);
+            //    BitmapImage bitmap = new BitmapImage();
+
+            //    await bitmap.SetSourceAsync(stream);
+
+            //    image.Source = bitmap;
+            //}
+            //else
+            //{
+            //    BitmapImage bitmap = new BitmapImage(new Uri("ms-appx:///Assets/CorBaikeLogo-310.png"));
+            //    image.Source = bitmap;
+            //}
             this.prograssRing.IsActive = false;
         }
 

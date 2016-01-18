@@ -97,6 +97,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Assets\CorBaikeLogo.psd" />
     <None Include="CorBaike_StoreKey.pfx" />
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="Assets\CorBaikeLogo-100.png" />

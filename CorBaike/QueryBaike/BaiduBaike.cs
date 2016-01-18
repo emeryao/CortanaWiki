@@ -14,6 +14,7 @@ namespace QueryBaike
         {
             public string Summary { get; set; }
             public StorageFile Image { get; set; }
+            public string Url { get; set; }
         }
 
         public async static Task<BaikeData> QueryByKeyword(string keyword)
@@ -35,7 +36,7 @@ namespace QueryBaike
 
             // replace to wap baike to shorter the html
             url = url.Replace("baike", "wapbaike");
-
+            retData.Url = url;
             if (!string.IsNullOrWhiteSpace(url))
             {
                 string content = await GetHttpResponse(url);

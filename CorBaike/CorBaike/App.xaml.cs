@@ -79,58 +79,36 @@ namespace CorBaike
 
         }
 
-        //protected override void OnActivated(IActivatedEventArgs args)
-        //{
-        //    base.OnActivated(args);
+        protected override void OnActivated(IActivatedEventArgs args)
+        {
+            base.OnActivated(args);
 
-        //    Type navigationToPageType;
+            // If the app was launched via a Voice Command, this corresponds to the "show trip to <location>" command. 
+            // Protocol activation occurs when a tile is clicked within Cortana (via the background task)
+            if (args.Kind == ActivationKind.Protocol)
+            {
+                var commandArgs = args as ProtocolActivatedEventArgs;
 
-        //    string paramKeyword = "";
+                Windows.Foundation.WwwFormUrlDecoder decoder = new Windows.Foundation.WwwFormUrlDecoder(commandArgs.Uri.Query);
+                var keyword = decoder.GetFirstValueByName("LaunchContext");
 
-        //    // If the app was launched via a Voice Command, this corresponds to the "show trip to <location>" command. 
-        //    // Protocol activation occurs when a tile is clicked within Cortana (via the background task)
-        //    if (args.Kind == ActivationKind.VoiceCommand)
-        //    {
-        //        var commandArgs = args as VoiceCommandActivatedEventArgs;
+                Frame rootFrame = Window.Current.Content as Frame;
 
-        //        Windows.Media.SpeechRecognition.SpeechRecognitionResult speechRecognitionResult = commandArgs.Result;
+                if (rootFrame == null)
+                {
+                    rootFrame = new Frame();
 
+                    rootFrame.NavigationFailed += OnNavigationFailed;
 
-        //        string voiceCommandName = speechRecognitionResult.RulePath[0];
-        //        string textSpoken = speechRecognitionResult.Text;
-        //        string commandMode = this.SemanticInterpretation("commandMode", speechRecognitionResult);
+                    Window.Current.Content = rootFrame;
+                }
 
-        //        switch (voiceCommandName)
-        //        {
-        //            case "showBaikeForKeyword":
-        //                string keyword = this.SemanticInterpretation("keyword", speechRecognitionResult);
+                rootFrame.Navigate(typeof(MainPage), keyword);
 
-        //                paramKeyword = keyword;
+                Window.Current.Activate();
 
-        //                navigationToPageType = typeof(MainPage);
-        //                break;
-        //            default:
-        //                navigationToPageType = typeof(MainPage);
-        //                break;
-        //        }
-
-        //        Frame rootFrame = Window.Current.Content as Frame;
-
-        //        if (rootFrame == null)
-        //        {
-        //            rootFrame = new Frame();
-
-        //            rootFrame.NavigationFailed += OnNavigationFailed;
-
-        //            Window.Current.Content = rootFrame;
-        //        }
-
-        //        rootFrame.Navigate(navigationToPageType, paramKeyword);
-
-        //        Window.Current.Activate();
-
-        //    }
-        //}
+            }
+        }
 
         /// <summary>
         /// Invoked when Navigation to a certain page fails

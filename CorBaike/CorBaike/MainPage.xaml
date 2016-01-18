@@ -24,6 +24,7 @@
         <Image x:Name="image" HorizontalAlignment="Left" Height="100" Margin="10,10,0,0" VerticalAlignment="Top" Width="100" Source="Assets/CorBaikeLogo-310.png"/>
         <TextBlock x:Name="textBlock" Margin="115,10,0,0" TextWrapping="Wrap" Text="小娜百科" VerticalAlignment="Top" Height="61" FontSize="45" HorizontalAlignment="Left" Width="198"/>
         <TextBlock x:Name="textBlock1" Margin="115,71,0,0" TextWrapping="Wrap" Text="不用打字的百度百科" VerticalAlignment="Top" TextAlignment="Right" HorizontalAlignment="Left" Width="175"/>
+        <WebView x:Name="webView" Margin="10,152,10,45" Visibility="Collapsed"/>
         <ProgressRing x:Name="prograssRing" HorizontalAlignment="Stretch" Margin="150,180,150,0" VerticalAlignment="Top" Height="58"/>
     </Grid>
 

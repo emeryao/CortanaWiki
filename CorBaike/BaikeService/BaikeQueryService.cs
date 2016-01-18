@@ -69,6 +69,8 @@ namespace CorBaike.BaikeService
             else
                 queryResponse = VoiceCommandResponse.CreateResponse(userMessage);
 
+            queryResponse.AppLaunchArgument = keyword;
+
             await voiceServiceConnection.ReportSuccessAsync(queryResponse);
         }
 
