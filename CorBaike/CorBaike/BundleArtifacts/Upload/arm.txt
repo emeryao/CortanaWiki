@@ -1,0 +1,4 @@
+MainPackage=C:\Users\luyao\Source\Repos\CorBaike\CorBaike\CorBaike\bin\ARM\Release\Upload\CorBaike_1.3.3.0_ARM.appx
+SymbolPackage=C:\Users\luyao\Source\Repos\CorBaike\CorBaike\CorBaike\AppPackages\CorBaike_1.3.3.0\CorBaike_1.3.3.0_ARM.appxsym
+ResourcePack=C:\Users\luyao\Source\Repos\CorBaike\CorBaike\CorBaike\_scale-100.appx
+ResourcePack=C:\Users\luyao\Source\Repos\CorBaike\CorBaike\CorBaike\_scale-400.appx

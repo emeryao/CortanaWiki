@@ -61,9 +61,9 @@ namespace CorBaike
         {
             if (string.IsNullOrWhiteSpace(keyword))
             {
-                if ((image.Source as BitmapImage)?.UriSource?.AbsoluteUri != "ms-appx:///Assets/CorBaikeLogo-310.png")
+                if ((image.Source as BitmapImage)?.UriSource?.AbsoluteUri != "ms-appx:///Assets/CorBaikeIcon.png")
                 {
-                    BitmapImage bitmap = new BitmapImage(new Uri("ms-appx:///Assets/CorBaikeLogo-310.png"));
+                    BitmapImage bitmap = new BitmapImage(new Uri("ms-appx:///Assets/CorBaikeIcon.png"));
                     image.Source = bitmap;
                 }
 
@@ -101,7 +101,7 @@ namespace CorBaike
             //}
             //else
             //{
-            //    BitmapImage bitmap = new BitmapImage(new Uri("ms-appx:///Assets/CorBaikeLogo-310.png"));
+            //    BitmapImage bitmap = new BitmapImage(new Uri("ms-appx:///Assets/CorBaikeIcon.png"));
             //    image.Source = bitmap;
             //}
             this.prograssRing.IsActive = false;
@@ -122,9 +122,9 @@ namespace CorBaike
             txbKeyword.Text = "";
             txbResult.Text = "";
 
-            if ((image.Source as BitmapImage)?.UriSource?.AbsoluteUri != "ms-appx:///Assets/CorBaikeLogo-310.png")
+            if ((image.Source as BitmapImage)?.UriSource?.AbsoluteUri != "ms-appx:///Assets/CorBaikeIcon.png")
             {
-                BitmapImage bitmap = new BitmapImage(new Uri("ms-appx:///Assets/CorBaikeLogo-310.png"));
+                BitmapImage bitmap = new BitmapImage(new Uri("ms-appx:///Assets/CorBaikeIcon.png"));
                 image.Source = bitmap;
             }
 

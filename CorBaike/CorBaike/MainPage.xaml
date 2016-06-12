@@ -21,7 +21,7 @@
         <TextBox x:Name="txbKeyword" Margin="10,115,80,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="24" PlaceholderText="请输入关键字后点击查询" KeyDown="txbKeyword_KeyDown"/>
         <TextBlock x:Name="txbResult" Margin="10,152,10,45" TextWrapping="Wrap" Text="打开小娜/Cortana对她说：小娜百科查询+你想查询的词语。就可以听到小娜说给你听的查询结果啦！"/>
         <Button x:Name="button" Content="查询" HorizontalAlignment="Right" Margin="0,115,10,0" VerticalAlignment="Top" Click="button_Click" Height="32" Width="65"/>
-        <Image x:Name="image" HorizontalAlignment="Left" Height="100" Margin="10,10,0,0" VerticalAlignment="Top" Width="100" Source="Assets/CorBaikeLogo-310.png"/>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="90" Margin="15,15,0,0" VerticalAlignment="Top" Width="90" Source="Assets/CorBaikeIcon.png"/>
         <TextBlock x:Name="textBlock" Margin="115,10,0,0" TextWrapping="Wrap" Text="小娜百科" VerticalAlignment="Top" Height="61" FontSize="45" HorizontalAlignment="Left" Width="198"/>
         <TextBlock x:Name="textBlock1" Margin="115,71,0,0" TextWrapping="Wrap" Text="不用打字的百度百科" VerticalAlignment="Top" TextAlignment="Right" HorizontalAlignment="Left" Width="175"/>
         <WebView x:Name="webView" Margin="10,152,10,45" Visibility="Collapsed"/>
