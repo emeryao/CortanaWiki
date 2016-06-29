@@ -111,12 +111,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\QueryBaike.rd.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\HtmlParser\HtmlParser.csproj">
-      <Project>{90eeb89c-ab6a-4817-b3b2-d02246e99c6c}</Project>
-      <Name>HtmlParser</Name>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
