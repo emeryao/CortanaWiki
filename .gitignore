@@ -149,6 +149,7 @@ csx/
 
 # Windows Store app package directory
 AppPackages/
+CorBaike/CorBaike/BundleArtifacts/
 
 # Others
 *.[Cc]ache

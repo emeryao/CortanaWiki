@@ -3,31 +3,35 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:CorBaike"
+    xmlns:converters="using:CorBaike.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RequestedTheme="Light">
+    mc:Ignorable="d" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RequestedTheme="Dark">
+    <Page.Resources>
+        <converters:BoolToVisibilityConverter x:Key="btv"/>
+    </Page.Resources>
     <Page.BottomAppBar>
-        <CommandBar ClosedDisplayMode="Minimal">
-            <AppBarButton Label="切换主题" Click="AppBarButton_Click">
+        <CommandBar Visibility="{x:Bind NoKeyboard, Mode=OneWay, Converter={StaticResource btv}}">
+            <AppBarButton Label="切换主题" Click="abbToggleTheme_Click">
                 <AppBarButton.Icon>
-                    <FontIcon Glyph="&#xE771;" />
+                    <FontIcon Glyph="{x:Bind ThemeGlyph, Mode=OneWay}" />
                 </AppBarButton.Icon>
             </AppBarButton>
-            <AppBarButton x:Name="abbClearTemp" Label="清空缓存" Icon="Delete" Click="abbClearTemp_Click"/>
+            <AppBarButton Label="清空缓存" Icon="Delete" Click="abbClearTemp_Click"/>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Label="{x:Bind Version}"/>
+            </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
 
     <Grid>
         <TextBox x:Name="txbKeyword" Margin="10,115,80,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="24" PlaceholderText="请输入关键字后点击查询" KeyDown="txbKeyword_KeyDown"/>
-        <TextBlock x:Name="txbResult" Margin="10,152,10,45" TextWrapping="Wrap" Text="打开小娜/Cortana对她说：小娜百科查询+你想查询的词语。就可以听到小娜说给你听的查询结果啦！"/>
-        <Button x:Name="button" Content="查询" HorizontalAlignment="Right" Margin="0,115,10,0" VerticalAlignment="Top" Click="button_Click" Height="32" Width="65"/>
-        <Image x:Name="image" HorizontalAlignment="Left" Height="90" Margin="15,15,0,0" VerticalAlignment="Top" Width="90" Source="Assets/CorBaikeIcon.png"/>
-        <TextBlock x:Name="textBlock" Margin="115,10,0,0" TextWrapping="Wrap" Text="小娜百科" VerticalAlignment="Top" Height="61" FontSize="45" HorizontalAlignment="Left" Width="198"/>
-        <TextBlock x:Name="textBlock1" Margin="115,71,0,0" TextWrapping="Wrap" Text="不用打字的百度百科" VerticalAlignment="Top" TextAlignment="Right" HorizontalAlignment="Left" Width="175"/>
+        <TextBlock x:Name="txbResult" Margin="10,152,10,45" TextWrapping="Wrap" Text="打开Cortana (小娜) 对她说：小娜百科查询+你想查询的词语。就可以听到小娜说给你听的查询结果啦！"/>
+        <Button Content="查询" HorizontalAlignment="Right" Margin="0,115,10,0" VerticalAlignment="Top" Click="button_Click" Height="32" Width="65"/>
+        <Image HorizontalAlignment="Left" Height="90" Margin="15,15,0,0" VerticalAlignment="Top" Width="90" Source="{x:Bind TitleImage, Mode=OneWay}"/>
+        <TextBlock Margin="115,10,0,0" TextWrapping="Wrap" Text="小娜百科" VerticalAlignment="Top" Height="61" FontSize="45" HorizontalAlignment="Left" Width="198"/>
+        <TextBlock Margin="115,71,0,0" TextWrapping="Wrap" Text="不用打字的百度百科" VerticalAlignment="Top" TextAlignment="Right" HorizontalAlignment="Left" Width="175"/>
         <WebView x:Name="webView" Margin="10,152,10,45" Visibility="Collapsed"/>
-        <ProgressRing x:Name="prograssRing" HorizontalAlignment="Stretch" Margin="150,180,150,0" VerticalAlignment="Top" Height="58"/>
+        <ProgressRing IsActive="{x:Bind IsBusy, Mode=OneWay}" HorizontalAlignment="Stretch" Margin="150,180,150,0" VerticalAlignment="Top" Height="58"/>
     </Grid>
-
-
-
 </Page>

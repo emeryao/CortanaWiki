@@ -1,2 +1,2 @@
-MainPackage=D:\CorBaike\CorBaike\CorBaike\bin\x64\Release\Upload\CorBaike_1.6.5.0_x64.appx
-SymbolPackage=D:\CorBaike\CorBaike\CorBaike\AppPackages\CorBaike_1.6.5.0\CorBaike_1.6.5.0_x64.appxsym
+MainPackage=C:\Users\Emeryao\Source\Repos\CorBaike\CorBaike\CorBaike\bin\x64\Release\Upload\CorBaike_1.7.0.0_x64.appx
+SymbolPackage=C:\Users\Emeryao\Source\Repos\CorBaike\CorBaike\CorBaike\AppPackages\CorBaike_1.7.0.0\CorBaike_1.7.0.0_x64.appxsym

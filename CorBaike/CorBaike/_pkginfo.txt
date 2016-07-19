@@ -1,1 +1,1 @@
-D:\CorBaike\CorBaike\CorBaike\AppPackages\CorBaike_1.6.5.0\CorBaike_1.6.5.0_x86_x64_arm.appxbundle
+C:\Users\Emeryao\Source\Repos\CorBaike\CorBaike\CorBaike\AppPackages\CorBaike_1.7.0.0\CorBaike_1.7.0.0_x86_x64_arm.appxbundle

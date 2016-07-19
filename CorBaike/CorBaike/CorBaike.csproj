@@ -97,9 +97,9 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Assets\CorBaikeLogo.psd" />
     <None Include="CorBaike_SignKey.pfx" />
     <None Include="Package.StoreAssociation.xml" />
+    <Content Include="Assets\CorBaikeIcon-blue.png" />
     <Content Include="Assets\CorBaikeIcon.png" />
     <Content Include="Assets\NewStoreLogo.scale-100.png" />
     <Content Include="Assets\NewStoreLogo.scale-125.png" />
@@ -153,6 +153,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
