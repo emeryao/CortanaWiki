@@ -1,1 +1,1 @@
-C:\Users\luyao\Source\Repos\CorBaike\CorBaike\CorBaike\AppPackages\CorBaike_1.6.0.0\CorBaike_1.6.0.0_x86_x64_arm.appxbundle
+D:\CorBaike\CorBaike\CorBaike\AppPackages\CorBaike_1.6.5.0\CorBaike_1.6.5.0_x86_x64_arm.appxbundle

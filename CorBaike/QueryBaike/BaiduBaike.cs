@@ -39,31 +39,27 @@ namespace QueryBaike
                 retData.Summary = $"抱歉，没有找到与{keyword}相关的百科结果。";
                 return retData;
             }
-            
+
             string url = $"http://wapbaike.baidu.com/view/{id}.htm";
 
-            //string clientUrl = $"http://baike.baidu.com/client/view/{id}.htm";
+            string clientUrl = $"http://baike.baidu.com/client/view/{id}.htm";
 
             retData.Url = url;
-            if (!string.IsNullOrWhiteSpace(url))
+            if (!string.IsNullOrWhiteSpace(clientUrl))
             {
-                string content = await GetHttpResponse(url);
+                string content = await GetHttpResponse(clientUrl);
 
                 HtmlParser parser = new HtmlParser();
 
                 var detailDoc = parser.Parse(content);
 
-                var elements = detailDoc.QuerySelectorAll("div#main>div.card>p.summary~p");
+                var element = detailDoc.QuerySelector("#lemma-card .summary");
 
-                if (elements?.Length > 0)
+                if (element != null)
                 {
-                    string strText = "";
-                    elements.ToList().ForEach((e) =>
-                    {
-                        strText += e.TextContent;
-                    });
+                    string strText = element.TextContent;
 
-                    strText = strText.Replace("\n", "").Replace("\n", "").Replace(" ", "");
+                    strText = strText.Replace("\r", "").Replace("\n", "").Replace(" ", "");
 
                     if (strText.Length > 230)
                     {
@@ -74,9 +70,19 @@ namespace QueryBaike
 
                     retData.Summary = strText + "\r\n转到小娜百科就可以查看详细的百科信息了哦！么么哒！";
 
-                    var img = detailDoc.QuerySelector(".img-box>a>img");
+                    string imageSource = "";
 
-                    string imageSource = img?.Attributes["src"].Value;
+                    var cardImg = detailDoc.QuerySelector("#lemma-card .card-img");
+                    if (cardImg?.TextContent.Contains("正在下载") == true)
+                    {
+                        var imgSpan = detailDoc.QuerySelector("#lemma-card .card-img a span");
+                        imageSource = imgSpan?.Attributes["data-url"]?.Value;
+                    }
+                    else
+                    {
+                        var img = detailDoc.QuerySelector("#lemma-card .card-img img");
+                        imageSource = img?.Attributes["src"]?.Value;
+                    }
 
                     if (!string.IsNullOrWhiteSpace(imageSource))
                     {

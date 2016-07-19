@@ -1,6 +1,6 @@
-MainPackage=C:\Users\luyao\Source\Repos\CorBaike\CorBaike\CorBaike\bin\ARM\Release\Upload\CorBaike_1.6.0.0_ARM.appx
-SymbolPackage=C:\Users\luyao\Source\Repos\CorBaike\CorBaike\CorBaike\AppPackages\CorBaike_1.6.0.0\CorBaike_1.6.0.0_ARM.appxsym
-ResourcePack=C:\Users\luyao\Source\Repos\CorBaike\CorBaike\CorBaike\_scale-100.appx
-ResourcePack=C:\Users\luyao\Source\Repos\CorBaike\CorBaike\CorBaike\_scale-125.appx
-ResourcePack=C:\Users\luyao\Source\Repos\CorBaike\CorBaike\CorBaike\_scale-150.appx
-ResourcePack=C:\Users\luyao\Source\Repos\CorBaike\CorBaike\CorBaike\_scale-400.appx
+MainPackage=D:\CorBaike\CorBaike\CorBaike\bin\ARM\Release\Upload\CorBaike_1.6.5.0_ARM.appx
+SymbolPackage=D:\CorBaike\CorBaike\CorBaike\AppPackages\CorBaike_1.6.5.0\CorBaike_1.6.5.0_ARM.appxsym
+ResourcePack=D:\CorBaike\CorBaike\CorBaike\_scale-100.appx
+ResourcePack=D:\CorBaike\CorBaike\CorBaike\_scale-125.appx
+ResourcePack=D:\CorBaike\CorBaike\CorBaike\_scale-150.appx
+ResourcePack=D:\CorBaike\CorBaike\CorBaike\_scale-400.appx

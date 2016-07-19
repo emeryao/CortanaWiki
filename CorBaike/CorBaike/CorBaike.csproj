@@ -20,8 +20,8 @@
     <AppxSymbolPackageEnabled>True</AppxSymbolPackageEnabled>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>7190F5554E7A18921855DAE950D7C6D3B9123E00</PackageCertificateThumbprint>
-    <PackageCertificateKeyFile>CorBaike_StoreKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateThumbprint>403E3273313AE280F4B2507DA5498E9E32A788C0</PackageCertificateThumbprint>
+    <PackageCertificateKeyFile>CorBaike_SignKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -98,7 +98,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Assets\CorBaikeLogo.psd" />
-    <None Include="CorBaike_StoreKey.pfx" />
+    <None Include="CorBaike_SignKey.pfx" />
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="Assets\CorBaikeIcon.png" />
     <Content Include="Assets\NewStoreLogo.scale-100.png" />
@@ -187,9 +187,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="Microsoft.NET.Native.Runtime.1.1, Version=1.1">
-      <Name>Microsoft .NET Native Runtime Package for Windows</Name>
-    </SDKReference>
     <SDKReference Include="WindowsDesktop, Version=10.0.10586.0">
       <Name>Windows Desktop Extensions for the UWP</Name>
     </SDKReference>

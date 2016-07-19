@@ -23,8 +23,8 @@ namespace CorBaike
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (ApplicationData.Current.RoamingSettings.Values.ContainsKey("Theme"))
-                this.RequestedTheme = (ElementTheme)Enum.Parse(typeof(ElementTheme), ApplicationData.Current.RoamingSettings.Values["Theme"].ToString());
+            if (ApplicationData.Current.LocalSettings.Values.ContainsKey("Theme"))
+                this.RequestedTheme = (ElementTheme)Enum.Parse(typeof(ElementTheme), ApplicationData.Current.LocalSettings.Values["Theme"].ToString());
 
             base.OnNavigatedTo(e);
 
@@ -141,7 +141,7 @@ namespace CorBaike
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
             this.RequestedTheme = this.RequestedTheme == ElementTheme.Light ? ElementTheme.Dark : ElementTheme.Light;
-            ApplicationData.Current.RoamingSettings.Values["Theme"] = this.RequestedTheme.ToString();
+            ApplicationData.Current.LocalSettings.Values["Theme"] = this.RequestedTheme.ToString();
         }
     }
 }
