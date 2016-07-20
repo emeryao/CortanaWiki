@@ -7,8 +7,8 @@
     <ProjectGuid>{DFAD1957-400E-4F8D-BE9A-6F6C06080E46}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CorBaike</RootNamespace>
-    <AssemblyName>CorBaike</AssemblyName>
+    <RootNamespace>CortanaWiki</RootNamespace>
+    <AssemblyName>CortanaWiki</AssemblyName>
     <DefaultLanguage>zh-CN</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
@@ -21,7 +21,7 @@
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
     <PackageCertificateThumbprint>403E3273313AE280F4B2507DA5498E9E32A788C0</PackageCertificateThumbprint>
-    <PackageCertificateKeyFile>CorBaike_SignKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>CortanaWiki_SignKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -97,10 +97,10 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="CorBaike_SignKey.pfx" />
+    <None Include="CortanaWiki_SignKey.pfx" />
     <None Include="Package.StoreAssociation.xml" />
-    <Content Include="Assets\CorBaikeIcon-blue.png" />
-    <Content Include="Assets\CorBaikeIcon.png" />
+    <Content Include="Assets\CortanaWikiIcon-blue.png" />
+    <Content Include="Assets\CortanaWikiIcon.png" />
     <Content Include="Assets\NewStoreLogo.scale-100.png" />
     <Content Include="Assets\NewStoreLogo.scale-125.png" />
     <Content Include="Assets\NewStoreLogo.scale-150.png" />
@@ -157,6 +157,7 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

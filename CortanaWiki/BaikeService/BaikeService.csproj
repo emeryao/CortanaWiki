@@ -7,7 +7,7 @@
     <ProjectGuid>{F6E4F8D1-1C04-4D32-A948-F1941D3ABAA2}</ProjectGuid>
     <OutputType>winmdobj</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CorBaike.BaikeService</RootNamespace>
+    <RootNamespace>CortanaWiki.BaikeService</RootNamespace>
     <AssemblyName>BaikeService</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>

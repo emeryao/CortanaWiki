@@ -9,24 +9,17 @@ using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using Windows.Web.Http;
 
-namespace CorBaike
+namespace CortanaWiki
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class MainPage : Page
     {
+
+        public MainViewModel Vm { get; set; } = new MainViewModel();
+
         #region Dependency Property
-        public string ThemeGlyph
-        {
-            get { return (string)GetValue(ThemeGlyphProperty); }
-            set { SetValue(ThemeGlyphProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Glyph.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ThemeGlyphProperty =
-            DependencyProperty.Register("Glyph", typeof(string), typeof(MainPage), new PropertyMetadata('\uE706'.ToString()));
-
         public string Version
         {
             get { return (string)GetValue(VersionProperty); }
@@ -80,8 +73,8 @@ namespace CorBaike
         #endregion
 
         #region Private Property
-        private static BitmapImage titleImage = new BitmapImage(new Uri("ms-appx:///Assets/CorBaikeIcon.png"));
-        private BitmapImage titleImageBlue = new BitmapImage(new Uri("ms-appx:///Assets/CorBaikeIcon-blue.png"));
+        private static BitmapImage titleImage = new BitmapImage(new Uri("ms-appx:///Assets/CortanaWikiIcon.png"));
+        private BitmapImage titleImageBlue = new BitmapImage(new Uri("ms-appx:///Assets/CortanaWikiIcon-blue.png"));
 
         #endregion
 
@@ -200,12 +193,12 @@ namespace CorBaike
             if (this.RequestedTheme == ElementTheme.Dark)
             {
                 this.TitleImage = titleImage;
-                this.ThemeGlyph = '\uE706'.ToString();
+                this.Vm.ThemeGlyph = '\uE706'.ToString();
             }
             else
             {
                 this.TitleImage = this.titleImageBlue;
-                this.ThemeGlyph = '\uE708'.ToString();
+                this.Vm.ThemeGlyph = '\uE708'.ToString();
             }
         }
 

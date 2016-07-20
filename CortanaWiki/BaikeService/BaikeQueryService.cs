@@ -5,7 +5,7 @@ using Windows.ApplicationModel.AppService;
 using Windows.ApplicationModel.Background;
 using Windows.ApplicationModel.VoiceCommands;
 
-namespace CorBaike.BaikeService
+namespace CortanaWiki.BaikeService
 {
     public sealed class BaikeQueryService : IBackgroundTask
     {
