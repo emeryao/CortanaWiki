@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorBaike", "CorBaike\CorBaike.csproj", "{DFAD1957-400E-4F8D-BE9A-6F6C06080E46}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CortanaWiki", "CortanaWiki\CortanaWiki.csproj", "{DFAD1957-400E-4F8D-BE9A-6F6C06080E46}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueryBaike", "QueryBaike\QueryBaike.csproj", "{41F5EF51-A1A8-492A-89F6-906388078526}"
 EndProject
