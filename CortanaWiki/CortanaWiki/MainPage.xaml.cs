@@ -17,64 +17,12 @@ namespace CortanaWiki
     /// </summary>
     public sealed partial class MainPage : Page
     {
-
+        #region Property
         public MainViewModel Vm { get; set; } = new MainViewModel();
-
-        #region Dependency Property
-        public string Version
-        {
-            get { return (string)GetValue(VersionProperty); }
-            set { SetValue(VersionProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Version.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty VersionProperty =
-            DependencyProperty.Register("Version", typeof(string), typeof(MainPage), new PropertyMetadata("当前版本：1.0.0"));
-
-
-        public BitmapImage TitleImage
-        {
-            get { return (BitmapImage)GetValue(TitleImageProperty); }
-            set { SetValue(TitleImageProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for TitleImage.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty TitleImageProperty =
-            DependencyProperty.Register("TitleImage", typeof(BitmapImage), typeof(MainPage), new PropertyMetadata(titleImage));
-
-        public bool IsBusy
-        {
-            get { return (bool)GetValue(IsBusyProperty); }
-            set { SetValue(IsBusyProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for IsBusy.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IsBusyProperty =
-            DependencyProperty.Register("IsBusy", typeof(bool), typeof(MainPage), new PropertyMetadata(false));
-
-        public string Keyword
-        {
-            get { return (string)GetValue(KeywordProperty); }
-            set { SetValue(KeywordProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Keyword.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty KeywordProperty =
-            DependencyProperty.Register("Keyword", typeof(string), typeof(MainPage), new PropertyMetadata(""));
-
-        public bool NoKeyboard
-        {
-            get { return (bool)GetValue(NoKeyboardProperty); }
-            set { SetValue(NoKeyboardProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for KeyboardOpened.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty NoKeyboardProperty =
-            DependencyProperty.Register("NoKeyboard", typeof(bool), typeof(MainPage), new PropertyMetadata(true));
         #endregion
 
-        #region Private Property
-        private static BitmapImage titleImage = new BitmapImage(new Uri("ms-appx:///Assets/CortanaWikiIcon.png"));
+        #region Field
+        private BitmapImage titleImage = new BitmapImage(new Uri("ms-appx:///Assets/CortanaWikiIcon.png"));
         private BitmapImage titleImageBlue = new BitmapImage(new Uri("ms-appx:///Assets/CortanaWikiIcon-blue.png"));
 
         private bool isMobile = Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile";
@@ -82,22 +30,18 @@ namespace CortanaWiki
 
         public MainPage()
         {
-            //Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily==Windows.Desktop?Windows.Mobile;
             this.InitializeComponent();
-
-            this.Version = $"当前版本：{Windows.ApplicationModel.Package.Current.Id.Version.Major}.{Windows.ApplicationModel.Package.Current.Id.Version.Minor}.{Windows.ApplicationModel.Package.Current.Id.Version.Build}";
 
             if (isMobile)
             {
-
-                Windows.UI.ViewManagement.InputPane.GetForCurrentView().Showing += (sender, args) =>
+                InputPane.GetForCurrentView().Showing += (sender, args) =>
                 {
-                    this.NoKeyboard = false;
+                    this.Vm.NoKeyboard = false;
                 };
 
-                Windows.UI.ViewManagement.InputPane.GetForCurrentView().Hiding += (sender, args) =>
+                InputPane.GetForCurrentView().Hiding += (sender, args) =>
                 {
-                    this.NoKeyboard = true;
+                    this.Vm.NoKeyboard = true;
                 };
             }
         }
@@ -119,9 +63,7 @@ namespace CortanaWiki
 
             if (!string.IsNullOrWhiteSpace(result.Url))
             {
-                txbResult.Visibility = Visibility.Collapsed;
-                webView.Visibility = Visibility.Visible;
-
+                this.Vm.IsComplete = true;
                 var requestMessage = new HttpRequestMessage(HttpMethod.Get, new Uri(result.Url));
                 requestMessage.Headers.Add("User-Agent", "Mozilla/5.0 (Windows Phone 10.0;  Android 4.2.1; Nokia; Lumia 520) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2486.0 Mobile Safari/537.36 Edge/13.10570");
                 webView.NavigateWithHttpRequestMessage(requestMessage);
@@ -138,43 +80,47 @@ namespace CortanaWiki
         {
             if (e.Key == Windows.System.VirtualKey.Enter)
             {
-                TextBox tb = sender as TextBox;
-                tb.IsEnabled = false;
-                tb.IsEnabled = true;
+                if (isMobile)
+                {
+                    TextBox tb = sender as TextBox;
+                    tb.IsEnabled = false;
+                    tb.IsEnabled = true;
+                }
                 await Query(txbKeyword.Text);
             }
         }
 
         private async Task Query(string keyword)
         {
+            this.Vm.IsBusy = true;
             if (string.IsNullOrWhiteSpace(keyword))
             {
-                txbResult.Text = "打开Cortana (小娜) 对她说：小娜百科查询+你想查询的词语。就可以听到小娜说给你听的查询结果啦！";
-                txbResult.Visibility = Visibility.Visible;
-                webView.Visibility = Visibility.Collapsed;
-
+                this.Vm.Result = "打开Cortana (小娜) 对她说：小娜百科查询+你想查询的词语。就可以听到小娜说给你听的查询结果啦！";
+                this.Vm.IsComplete = false;
                 return;
             }
-            this.IsBusy = true;
 
             var data = await QueryBaike.BaiduBaike.QueryByKeyword(keyword);
             if (!string.IsNullOrWhiteSpace(data.Url))
             {
-                txbResult.Visibility = Visibility.Collapsed;
-                webView.Visibility = Visibility.Visible;
-
+                this.Vm.IsComplete = true;
                 var requestMessage = new HttpRequestMessage(HttpMethod.Get, new Uri(data.Url));
                 requestMessage.Headers.Add("User-Agent", "Mozilla/5.0 (Windows Phone 10.0;  Android 4.2.1; Nokia; Lumia 520) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2486.0 Mobile Safari/537.36 Edge/13.10570");
                 webView.NavigateWithHttpRequestMessage(requestMessage);
             }
+            else
+            {
+                this.Vm.IsComplete = false;
+            }
 
-            this.IsBusy = false;
+
+            this.Vm.IsBusy = false;
         }
 
         private async void abbClearTemp_Click(object sender, RoutedEventArgs e)
         {
             txbKeyword.Text = "";
-            txbResult.Text = "";
+            this.Vm.Result = "打开Cortana (小娜) 对她说：小娜百科查询+你想查询的词语。就可以听到小娜说给你听的查询结果啦！";
 
             var files = await ApplicationData.Current.TemporaryFolder.GetFilesAsync();
             foreach (var file in files)
@@ -197,7 +143,7 @@ namespace CortanaWiki
         {
             if (this.RequestedTheme == ElementTheme.Dark)
             {
-                this.TitleImage = titleImage;
+                this.Vm.TitleImage = titleImage;
                 this.Vm.ThemeGlyph = '\uE706'.ToString();
 
                 if (this.isMobile && Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
@@ -223,7 +169,7 @@ namespace CortanaWiki
             }
             else
             {
-                this.TitleImage = this.titleImageBlue;
+                this.Vm.TitleImage = this.titleImageBlue;
                 this.Vm.ThemeGlyph = '\uE708'.ToString();
                 if (this.isMobile && Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
                 {

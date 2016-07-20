@@ -11,27 +11,27 @@
         <converters:BoolToVisibilityConverter x:Key="btv"/>
     </Page.Resources>
     <Page.BottomAppBar>
-        <CommandBar Visibility="{x:Bind NoKeyboard, Mode=OneWay, Converter={StaticResource btv}}">
+        <CommandBar Visibility="{x:Bind Vm.NoKeyboard, Mode=OneWay, Converter={StaticResource btv}}">
             <AppBarButton Label="切换主题" Click="abbToggleTheme_Click">
                 <AppBarButton.Icon>
-                    <FontIcon Glyph="{x:Bind Vm.ThemeGlyph, Mode=OneWay, FallbackValue=&#xE706;}" />
+                    <FontIcon Glyph="{x:Bind Vm.ThemeGlyph, Mode=OneWay, FallbackValue=&#xE706;, TargetNullValue=&#xE706;}" />
                 </AppBarButton.Icon>
             </AppBarButton>
             <AppBarButton Label="清空缓存" Icon="Delete" Click="abbClearTemp_Click"/>
             <CommandBar.SecondaryCommands>
-                <AppBarButton Label="{x:Bind Version}"/>
+                <AppBarButton Label="{x:Bind Vm.Version, FallbackValue=当前版本：1.0.0, TargetNullValue=当前版本：1.0.0}"/>
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
 
     <Grid>
-        <TextBox x:Name="txbKeyword" Margin="10,115,80,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="24" PlaceholderText="请输入关键字后点击查询" KeyDown="txbKeyword_KeyDown"/>
-        <TextBlock x:Name="txbResult" Margin="10,152,10,45" TextWrapping="Wrap" Text="打开Cortana (小娜) 对她说：小娜百科查询+你想查询的词语。就可以听到小娜说给你听的查询结果啦！"/>
-        <Button Content="查询" HorizontalAlignment="Right" Margin="0,115,10,0" VerticalAlignment="Top" Click="button_Click" Height="32" Width="65"/>
-        <Image HorizontalAlignment="Left" Height="90" Margin="15,15,0,0" VerticalAlignment="Top" Width="90" Source="{x:Bind TitleImage, Mode=OneWay, FallbackValue=Assets/CortanaWikiIcon.png}"/>
+        <Image HorizontalAlignment="Left" Height="90" Margin="15,15,0,0" VerticalAlignment="Top" Width="90" Source="{x:Bind Vm.TitleImage, Mode=OneWay, FallbackValue=Assets/CortanaWikiIcon.png, TargetNullValue=Assets/CortanaWikiIcon.png}"/>
         <TextBlock Margin="115,10,0,0" TextWrapping="Wrap" Text="小娜百科" VerticalAlignment="Top" Height="61" FontSize="45" HorizontalAlignment="Left" Width="198"/>
         <TextBlock Margin="115,71,0,0" TextWrapping="Wrap" Text="不用打字的百度百科" VerticalAlignment="Top" TextAlignment="Right" HorizontalAlignment="Left" Width="175"/>
-        <WebView x:Name="webView" Margin="10,152,10,45" Visibility="Collapsed"/>
-        <ProgressRing IsActive="{x:Bind IsBusy, Mode=OneWay}" HorizontalAlignment="Stretch" Margin="150,180,150,0" VerticalAlignment="Top" Height="58"/>
+        <TextBox x:Name="txbKeyword" Margin="10,115,80,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="24" PlaceholderText="请输入关键字后点击查询" KeyUp="txbKeyword_KeyDown"/>
+        <TextBlock Margin="10,152,10,45" TextWrapping="Wrap" Text="{x:Bind Vm.Result, Mode=OneWay, FallbackValue='打开Cortana (小娜) 对她说：小娜百科查询+关键词。就可以听到小娜说给你听的查询结果啦！'}" Visibility="{x:Bind Vm.IsComplete, Mode=OneWay, Converter={StaticResource btv}, ConverterParameter=true }"/>
+        <Button Content="查询" HorizontalAlignment="Right" Margin="0,115,10,0" VerticalAlignment="Top" Click="button_Click" Height="32" Width="65"/>
+        <WebView x:Name="webView" Margin="10,152,10,45" Visibility="{x:Bind Vm.IsComplete, Mode=OneWay, Converter={StaticResource btv}, FallbackValue=Collapsed}"/>
+        <ProgressRing IsActive="{x:Bind Vm.IsBusy, Mode=OneWay}" HorizontalAlignment="Stretch" Margin="150,180,150,0" VerticalAlignment="Top" Height="58"/>
     </Grid>
 </Page>

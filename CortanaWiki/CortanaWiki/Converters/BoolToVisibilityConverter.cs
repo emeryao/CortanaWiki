@@ -13,14 +13,16 @@ namespace CortanaWiki.Converters
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             bool? boolValue = value as bool?;
+            bool param = false;
+            bool.TryParse(parameter?.ToString(), out param);
 
             if (boolValue == null)
             {
-                return Visibility.Collapsed;
+                return param == true ? Visibility.Visible : Visibility.Collapsed;
             }
             else
             {
-                return boolValue.Value ? Visibility.Visible : Visibility.Collapsed;
+                return boolValue.Value ? ((param == true ? Visibility.Collapsed : Visibility.Visible)) : (param == true ? Visibility.Visible : Visibility.Collapsed);
             }
         }
 
