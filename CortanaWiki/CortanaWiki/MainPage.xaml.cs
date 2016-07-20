@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Windows.Storage;
-using Windows.Storage.Streams;
+using Windows.UI;
 using Windows.UI.Popups;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
@@ -76,6 +77,7 @@ namespace CortanaWiki
         private static BitmapImage titleImage = new BitmapImage(new Uri("ms-appx:///Assets/CortanaWikiIcon.png"));
         private BitmapImage titleImageBlue = new BitmapImage(new Uri("ms-appx:///Assets/CortanaWikiIcon-blue.png"));
 
+        private bool isMobile = Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile";
         #endregion
 
         public MainPage()
@@ -85,7 +87,7 @@ namespace CortanaWiki
 
             this.Version = $"当前版本：{Windows.ApplicationModel.Package.Current.Id.Version.Major}.{Windows.ApplicationModel.Package.Current.Id.Version.Minor}.{Windows.ApplicationModel.Package.Current.Id.Version.Build}";
 
-            if (Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile")
+            if (isMobile)
             {
 
                 Windows.UI.ViewManagement.InputPane.GetForCurrentView().Showing += (sender, args) =>
@@ -136,6 +138,9 @@ namespace CortanaWiki
         {
             if (e.Key == Windows.System.VirtualKey.Enter)
             {
+                TextBox tb = sender as TextBox;
+                tb.IsEnabled = false;
+                tb.IsEnabled = true;
                 await Query(txbKeyword.Text);
             }
         }
@@ -194,11 +199,52 @@ namespace CortanaWiki
             {
                 this.TitleImage = titleImage;
                 this.Vm.ThemeGlyph = '\uE706'.ToString();
+
+                if (this.isMobile && Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
+                {
+                    StatusBar statusBar = StatusBar.GetForCurrentView();
+                    statusBar.BackgroundColor = Colors.Black;
+                    statusBar.ForegroundColor = Colors.White;
+                    statusBar.BackgroundOpacity = 1;
+                }
+
+                if (!this.isMobile && Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.ApplicationView"))
+                {
+                    var titleBar = ApplicationView.GetForCurrentView().TitleBar;
+                    if (titleBar != null)
+                    {
+                        titleBar.ButtonBackgroundColor = Colors.Black;
+                        titleBar.ButtonForegroundColor = Colors.White;
+                        titleBar.BackgroundColor = Colors.Black;
+                        titleBar.ForegroundColor = Colors.White;
+                    }
+                }
+
             }
             else
             {
                 this.TitleImage = this.titleImageBlue;
                 this.Vm.ThemeGlyph = '\uE708'.ToString();
+                if (this.isMobile && Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
+                {
+                    StatusBar statusBar = StatusBar.GetForCurrentView();
+                    statusBar.BackgroundColor = Colors.White;
+                    statusBar.ForegroundColor = Colors.Black;
+                    statusBar.BackgroundOpacity = 1;
+                }
+
+                if (!this.isMobile && Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.ApplicationView"))
+                {
+                    var titleBar = ApplicationView.GetForCurrentView().TitleBar;
+                    if (titleBar != null)
+                    {
+                        titleBar.ButtonBackgroundColor = Colors.White;
+                        titleBar.ButtonForegroundColor = Colors.Black;
+                        titleBar.BackgroundColor = Colors.White;
+                        titleBar.ForegroundColor = Colors.Black;
+                    }
+                }
+
             }
         }
 
