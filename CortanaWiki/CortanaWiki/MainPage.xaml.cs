@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Windows.Storage;
+using Windows.System;
 using Windows.UI;
 using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
@@ -137,6 +138,11 @@ namespace CortanaWiki
             this.RequestedTheme = this.RequestedTheme == ElementTheme.Light ? ElementTheme.Dark : ElementTheme.Light;
             ApplicationData.Current.LocalSettings.Values["Theme"] = this.RequestedTheme.ToString();
             this.AdaptImageSource();
+        }
+
+        private async void StoreComment_Click(object sender, RoutedEventArgs e)
+        {
+            await Launcher.LaunchUriAsync(new Uri("ms-windows-store://review/?ProductId=9NBLGGH5KJ1B"));
         }
 
         private void AdaptImageSource()

@@ -20,6 +20,7 @@
             <AppBarButton Label="清空缓存" Icon="Delete" Click="abbClearTemp_Click"/>
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="{x:Bind Vm.Version, FallbackValue=当前版本：1.0.0, TargetNullValue=当前版本：1.0.0}"/>
+                <AppBarButton Label="赏个好评" Click="StoreComment_Click"/>
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
