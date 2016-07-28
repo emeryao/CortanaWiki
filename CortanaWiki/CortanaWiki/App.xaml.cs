@@ -35,6 +35,9 @@ namespace CortanaWiki
         /// <param name="e">Details about the launch request and process.</param>
         protected async override void OnLaunched(LaunchActivatedEventArgs e)
         {
+            // remove roaming data
+            if (ApplicationData.Current.RoamingSettings.Values.ContainsKey("Theme"))
+                ApplicationData.Current.RoamingSettings.Values.Remove("Theme");
 
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
