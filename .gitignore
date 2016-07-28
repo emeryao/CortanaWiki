@@ -150,6 +150,7 @@ csx/
 # Windows Store app package directory
 AppPackages/
 CortanaWiki/CortanaWiki/BundleArtifacts/
+CortanaWiki/CortanaWiki/_pkginfo.txt
 
 # Others
 *.[Cc]ache
