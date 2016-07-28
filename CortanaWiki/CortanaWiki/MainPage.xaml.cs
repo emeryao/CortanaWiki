@@ -49,7 +49,6 @@ namespace CortanaWiki
             }
         }
 
-
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             if (ApplicationData.Current.LocalSettings.Values.ContainsKey("Theme"))
@@ -100,6 +99,7 @@ namespace CortanaWiki
             {
                 this.Vm.Result = "打开Cortana (小娜) 对她说：小娜百科查询+你想查询的词语。就可以听到小娜说给你听的查询结果啦！";
                 this.Vm.IsComplete = false;
+                this.Vm.IsBusy = false;
                 return;
             }
 
@@ -114,8 +114,8 @@ namespace CortanaWiki
             else
             {
                 this.Vm.IsComplete = false;
+                this.Vm.Result = data.Summary;
             }
-
 
             this.Vm.IsBusy = false;
         }

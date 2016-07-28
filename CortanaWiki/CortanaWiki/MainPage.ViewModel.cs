@@ -68,7 +68,11 @@ namespace CortanaWiki
         public string Result
         {
             get { return result; }
-            set { result = value; }
+            set
+            {
+                result = value;
+                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(this.Result)));
+            }
         }
 
         private bool isComplete = false;
