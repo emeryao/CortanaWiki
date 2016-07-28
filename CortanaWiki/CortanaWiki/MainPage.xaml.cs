@@ -27,6 +27,8 @@ namespace CortanaWiki
         private BitmapImage titleImageBlue = new BitmapImage(new Uri("ms-appx:///Assets/CortanaWikiIcon-blue.png"));
 
         private bool isMobile = Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile";
+
+        private bool isWebviewLoading = true;
         #endregion
 
         public MainPage()
@@ -133,11 +135,17 @@ namespace CortanaWiki
             await dlg.ShowAsync();
         }
 
-        private void abbToggleTheme_Click(object sender, RoutedEventArgs e)
+        private async void abbToggleTheme_Click(object sender, RoutedEventArgs e)
         {
             this.RequestedTheme = this.RequestedTheme == ElementTheme.Light ? ElementTheme.Dark : ElementTheme.Light;
             ApplicationData.Current.LocalSettings.Values["Theme"] = this.RequestedTheme.ToString();
             this.AdaptImageSource();
+            if (this.Vm.IsComplete && !this.isWebviewLoading)
+            {
+                string jsCommand = "document.styleSheets[0].deleteRule(0);document.styleSheets[0].deleteRule(0);";
+                await this.webView.InvokeScriptAsync("eval", new string[] { jsCommand });
+                this.webView_LoadCompleted(null, null);
+            }
         }
 
         private async void StoreComment_Click(object sender, RoutedEventArgs e)
@@ -200,5 +208,28 @@ namespace CortanaWiki
             }
         }
 
+        private async void webView_LoadCompleted(object sender, NavigationEventArgs e)
+        {
+            string jsCommand = "";
+            switch (this.RequestedTheme)
+            {
+                case ElementTheme.Default:
+                case ElementTheme.Light:
+                    jsCommand = "document.styleSheets[0].insertRule('body{filter:invert(0%)}'); document.styleSheets[0].insertRule('img{filter:invert(0%)}'); ";
+                    break;
+                case ElementTheme.Dark:
+                    jsCommand = "document.styleSheets[0].insertRule('body{filter:invert(100%)}'); document.styleSheets[0].insertRule('img{filter:invert(100%)}'); ";
+                    break;
+                default:
+                    break;
+            }
+            await this.webView.InvokeScriptAsync("eval", new string[] { jsCommand });
+            this.isWebviewLoading = false;
+        }
+
+        private void webView_ContentLoading(WebView sender, WebViewContentLoadingEventArgs args)
+        {
+            this.isWebviewLoading = true;
+        }
     }
 }
