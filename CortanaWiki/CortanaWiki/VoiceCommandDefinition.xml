@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.2">
-  <CommandSet xml:lang="zh-cn" Name="AdventureWorksCommandSet_zh-cn">
-    <AppName> 小娜百科 </AppName>
+  <CommandSet xml:lang="zh-cn" Name="CortanaWikiCommandSet_zh-cn">
+    <AppName>百科</AppName>
     <Example>打开小娜百科 查询关键字</Example>
 
     <Command Name="showBaikeForKeyword">
