@@ -63,7 +63,7 @@ namespace CortanaWiki
             }
         }
 
-        private string result = "打开Cortana (小娜) 对她说：小娜百科查询+关键词。就可以听到小娜说给你听的查询结果啦！";
+        private string result = "打开Cortana (小娜) 对她说：百科查询+关键词。就可以听到小娜说给你听的查询结果啦！";
 
         public string Result
         {

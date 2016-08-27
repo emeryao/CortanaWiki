@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="21159Emeryao.27294C2541721" Publisher="CN=4D609959-8CBF-4FB5-9E87-6891532AEBDB" Version="1.7.2.0" />
+  <Identity Name="21159Emeryao.27294C2541721" Publisher="CN=4D609959-8CBF-4FB5-9E87-6891532AEBDB" Version="1.8.0.0" />
   <mp:PhoneIdentity PhoneProductId="93b38971-0b4b-4a7a-91b3-5421f2244e70" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>小娜百科</DisplayName>
@@ -26,10 +26,10 @@
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
       <Extensions>
-        <uap:Extension Category="windows.personalAssistantLaunch" />
         <uap:Extension Category="windows.appService" EntryPoint="CortanaWiki.BaikeService.BaikeQueryService">
           <uap:AppService Name="BaikeQueryService" />
         </uap:Extension>
+        <uap:Extension Category="windows.personalAssistantLaunch" />
       </Extensions>
     </Application>
   </Applications>

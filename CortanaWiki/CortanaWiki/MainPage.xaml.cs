@@ -97,7 +97,7 @@ namespace CortanaWiki
             this.Vm.IsBusy = true;
             if (string.IsNullOrWhiteSpace(keyword))
             {
-                this.Vm.Result = "打开Cortana (小娜) 对她说：小娜百科查询+你想查询的词语。就可以听到小娜说给你听的查询结果啦！";
+                this.Vm.Result = "打开Cortana (小娜) 对她说：百科查询+你想查询的词语。就可以听到小娜说给你听的查询结果啦！";
                 this.Vm.IsComplete = false;
                 this.Vm.IsBusy = false;
                 return;
@@ -123,7 +123,7 @@ namespace CortanaWiki
         private async void abbClearTemp_Click(object sender, RoutedEventArgs e)
         {
             txbKeyword.Text = "";
-            this.Vm.Result = "打开Cortana (小娜) 对她说：小娜百科查询+你想查询的词语。就可以听到小娜说给你听的查询结果啦！";
+            this.Vm.Result = "打开Cortana (小娜) 对她说：百科查询+你想查询的词语。就可以听到小娜说给你听的查询结果啦！";
 
             var files = await ApplicationData.Current.TemporaryFolder.GetFilesAsync();
             foreach (var file in files)

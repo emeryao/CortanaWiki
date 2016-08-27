@@ -7,7 +7,6 @@
     <Command Name="showBaikeForKeyword">
       <Example>查询关键字</Example>
       <ListenFor>查询{keyword}</ListenFor>
-      <Feedback>正在查询{keyword}</Feedback>
       <VoiceCommandService Target="BaikeQueryService"/>
     </Command>
 
