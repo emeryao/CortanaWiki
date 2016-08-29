@@ -65,7 +65,7 @@ namespace CortanaWiki.BaikeService
 
             VoiceCommandResponse queryResponse = null;
             if (data.Image != null)
-                queryResponse = VoiceCommandResponse.CreateResponse(userMessage, new List<VoiceCommandContentTile> { new VoiceCommandContentTile() { Image = data.Image, ContentTileType = VoiceCommandContentTileType.TitleWith280x140Icon } });
+                queryResponse = VoiceCommandResponse.CreateResponse(userMessage, new List<VoiceCommandContentTile> { new VoiceCommandContentTile() { Image = data.Image, ContentTileType = data.TileType } });
             else
                 queryResponse = VoiceCommandResponse.CreateResponse(userMessage);
 

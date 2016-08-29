@@ -2,11 +2,13 @@
 using Newtonsoft.Json;
 using System;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.VoiceCommands;
+using Windows.Graphics.Imaging;
 using Windows.Storage;
+using Windows.Storage.Streams;
 
 namespace QueryBaike
 {
@@ -17,6 +19,7 @@ namespace QueryBaike
             public string Summary { get; set; }
             public StorageFile Image { get; set; }
             public string Url { get; set; }
+            public VoiceCommandContentTileType TileType { get; set; } = VoiceCommandContentTileType.TitleWith280x140Icon;
         }
 
         public async static Task<BaikeData> QueryByKeyword(string keyword)
@@ -93,6 +96,19 @@ namespace QueryBaike
                             var bytes = await client.GetByteArrayAsync(imageSource);
 
                             await FileIO.WriteBytesAsync(file, bytes);
+                        }
+
+                        using (FileRandomAccessStream stream = (FileRandomAccessStream)await file.OpenAsync(FileAccessMode.Read))
+                        {
+                            BitmapDecoder decoder = await BitmapDecoder.CreateAsync(stream);
+                            if (decoder.PixelHeight > decoder.PixelWidth)
+                            {
+                                retData.TileType = VoiceCommandContentTileType.TitleWith68x92Icon;
+                            }
+                            if (decoder.PixelHeight == decoder.PixelWidth)
+                            {
+                                retData.TileType = VoiceCommandContentTileType.TitleWith68x68Icon;
+                            }
                         }
 
                         retData.Image = file;
