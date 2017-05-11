@@ -16,6 +16,7 @@
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="CortanaWiki.App">
       <uap:VisualElements DisplayName="小娜百科" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="CortanaWiki" BackgroundColor="transparent">
+        <uap:LockScreen Notification="badge" BadgeLogo="Assets\BadgeLogo.png" />
         <uap:DefaultTile Square310x310Logo="Assets\Square310x310Logo.png" Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\Square71x71Logo.png">
           <uap:ShowNameOnTiles>
             <uap:ShowOn Tile="square150x150Logo" />
@@ -26,10 +27,10 @@
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
       <Extensions>
-        <uap:Extension Category="windows.personalAssistantLaunch" />
         <uap:Extension Category="windows.appService" EntryPoint="CortanaWiki.BaikeService.BaikeQueryService">
           <uap:AppService Name="BaikeQueryService" />
         </uap:Extension>
+        <uap:Extension Category="windows.personalAssistantLaunch" />
       </Extensions>
     </Application>
   </Applications>

@@ -24,7 +24,7 @@ namespace CortanaWiki
 
         #region Field
         private BitmapImage titleImage = new BitmapImage(new Uri("ms-appx:///Assets/CortanaWikiIcon.png"));
-        private BitmapImage titleImageBlue = new BitmapImage(new Uri("ms-appx:///Assets/CortanaWikiIcon-blue.png"));
+        private BitmapImage titleImageDark = new BitmapImage(new Uri("ms-appx:///Assets/CortanaWikiIcon-dark.png"));
 
         private bool isMobile = Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile";
 
@@ -183,7 +183,7 @@ namespace CortanaWiki
             }
             else
             {
-                this.Vm.TitleImage = this.titleImageBlue;
+                this.Vm.TitleImage = this.titleImageDark;
                 this.Vm.ThemeGlyph = '\uE708'.ToString();
                 if (this.isMobile && Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
                 {
